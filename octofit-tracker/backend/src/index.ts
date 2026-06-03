@@ -1,7 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import { apiBaseUrl, port } from './config/apiBaseUrl';
-import { databaseName, mongoUri } from './config/database';
+import { connectToDatabase, mongoUri } from './config/database';
 import activitiesRouter from './routes/activities';
 import leaderboardRouter from './routes/leaderboard';
 import teamsRouter from './routes/teams';
@@ -29,9 +28,7 @@ app.get('/api/health', (_req, res) => {
 
 async function start() {
   try {
-    await mongoose.connect(mongoUri, {
-      dbName: databaseName,
-    });
+    await connectToDatabase();
     console.log(`MongoDB connected at ${mongoUri}`);
   } catch (error) {
     console.warn('MongoDB connection unavailable at startup.', error);

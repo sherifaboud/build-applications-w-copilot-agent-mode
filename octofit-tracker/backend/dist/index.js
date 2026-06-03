@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const mongoose_1 = __importDefault(require("mongoose"));
 const apiBaseUrl_1 = require("./config/apiBaseUrl");
 const database_1 = require("./config/database");
 const activities_1 = __importDefault(require("./routes/activities"));
@@ -29,9 +28,7 @@ app.get('/api/health', (_req, res) => {
 });
 async function start() {
     try {
-        await mongoose_1.default.connect(database_1.mongoUri, {
-            dbName: database_1.databaseName,
-        });
+        await (0, database_1.connectToDatabase)();
         console.log(`MongoDB connected at ${database_1.mongoUri}`);
     }
     catch (error) {
