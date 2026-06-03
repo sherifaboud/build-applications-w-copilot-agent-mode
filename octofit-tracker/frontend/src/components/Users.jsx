@@ -1,8 +1,12 @@
 import ResourceState from './ResourceState.jsx';
 import useCollection from '../hooks/useCollection.js';
 
+const usersApiEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+  : 'http://localhost:8000/api/users/';
+
 function Users() {
-  const { items: users, loading, error } = useCollection('users');
+  const { items: users, loading, error } = useCollection(usersApiEndpoint);
 
   return (
     <ResourceState title="Users" subtitle="Profiles, team membership, and active fitness goals." loading={loading} error={error}>

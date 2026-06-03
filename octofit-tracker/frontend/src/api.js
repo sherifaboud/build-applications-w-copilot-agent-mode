@@ -27,8 +27,11 @@ function normalizeResponse(payload) {
   return [];
 }
 
-export async function fetchCollection(collectionName) {
-  const response = await fetch(`${apiBaseUrl}/${collectionName}/`);
+export async function fetchCollection(collectionNameOrEndpoint) {
+  const endpoint = collectionNameOrEndpoint.startsWith('http')
+    ? collectionNameOrEndpoint
+    : `${apiBaseUrl}/${collectionNameOrEndpoint}/`;
+  const response = await fetch(endpoint);
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);

@@ -1,8 +1,12 @@
 import ResourceState from './ResourceState.jsx';
 import useCollection from '../hooks/useCollection.js';
 
+const leaderboardApiEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : 'http://localhost:8000/api/leaderboard/';
+
 function Leaderboard() {
-  const { items: entries, loading, error } = useCollection('leaderboard');
+  const { items: entries, loading, error } = useCollection(leaderboardApiEndpoint);
 
   return (
     <ResourceState title="Leaderboard" subtitle="Ranked weekly performance across OctoFit teams." loading={loading} error={error}>

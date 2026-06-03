@@ -1,8 +1,12 @@
 import ResourceState from './ResourceState.jsx';
 import useCollection from '../hooks/useCollection.js';
 
+const workoutsApiEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : 'http://localhost:8000/api/workouts/';
+
 function Workouts() {
-  const { items: workouts, loading, error } = useCollection('workouts');
+  const { items: workouts, loading, error } = useCollection(workoutsApiEndpoint);
 
   return (
     <ResourceState title="Workouts" subtitle="Personalized suggestions matched to user goals." loading={loading} error={error}>

@@ -8,8 +8,12 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
   minute: '2-digit',
 });
 
+const activitiesApiEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : 'http://localhost:8000/api/activities/';
+
 function Activities() {
-  const { items: activities, loading, error } = useCollection('activities');
+  const { items: activities, loading, error } = useCollection(activitiesApiEndpoint);
 
   return (
     <ResourceState title="Activities" subtitle="Recent workouts, effort notes, and calorie estimates." loading={loading} error={error}>

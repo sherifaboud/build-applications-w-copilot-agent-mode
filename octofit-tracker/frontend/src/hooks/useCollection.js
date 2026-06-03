@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchCollection } from '../api.js';
 
-function useCollection(collectionName) {
+function useCollection(collectionNameOrEndpoint) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -13,7 +13,7 @@ function useCollection(collectionName) {
       try {
         setLoading(true);
         setError('');
-        const result = await fetchCollection(collectionName);
+        const result = await fetchCollection(collectionNameOrEndpoint);
 
         if (isMounted) {
           setItems(result.items);
@@ -34,7 +34,7 @@ function useCollection(collectionName) {
     return () => {
       isMounted = false;
     };
-  }, [collectionName]);
+  }, [collectionNameOrEndpoint]);
 
   return { items, loading, error };
 }

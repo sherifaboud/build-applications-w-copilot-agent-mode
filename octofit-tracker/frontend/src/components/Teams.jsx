@@ -1,8 +1,12 @@
 import ResourceState from './ResourceState.jsx';
 import useCollection from '../hooks/useCollection.js';
 
+const teamsApiEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : 'http://localhost:8000/api/teams/';
+
 function Teams() {
-  const { items: teams, loading, error } = useCollection('teams');
+  const { items: teams, loading, error } = useCollection(teamsApiEndpoint);
 
   return (
     <ResourceState title="Teams" subtitle="Training groups with captains and weekly goals." loading={loading} error={error}>
