@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import { connectToDatabase, mongoUri } from './config/database';
 import activitiesRouter from './routes/activities';
@@ -12,7 +13,11 @@ const codespaceName = process.env.CODESPACE_NAME;
 const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
   : `http://localhost:${port}`;
+const frontendBaseUrl = codespaceName
+  ? `https://${codespaceName}-5173.app.github.dev`
+  : 'http://localhost:5173';
 
+app.use(cors({ origin: frontendBaseUrl }));
 app.use(express.json());
 
 app.use('/api/users', usersRouter);
