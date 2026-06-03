@@ -1,0 +1,50 @@
+:root {
+  color: #132238;
+  background: linear-gradient(135deg, #f7f1e3 0%, #d9ece7 50%, #b9d6f2 100%);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.hero-card {
+  max-width: 760px;
+  padding: 3rem;
+  border: 1px solid rgba(19, 34, 56, 0.08);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 24px 80px rgba(19, 34, 56, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.eyebrow {
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  color: #2c6e62;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 1rem;
+  }
+
+  .hero-card {
+    padding: 2rem 1.25rem;
+  }
+}
